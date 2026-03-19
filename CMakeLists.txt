@@ -8,6 +8,15 @@ option(LIBIGL_GLFW       "Use GLFW"           ON)
 
 include(libigl)
 
+# tests
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+  DOWNLOAD_EXTRACT_TIMESTAMP true
+)
+FetchContent_MakeAvailable(googletest)
+
 # Add your project files
 include_directories("include/")
 if(USE_SOLUTION)
@@ -21,3 +30,7 @@ target_link_libraries(core igl::core igl::glfw )
 
 add_executable(registration "main.cpp")
 target_link_libraries(registration core igl::core igl::opengl igl::glfw )
+
+# Enable testing
+enable_testing()
+add_subdirectory(tests)
