@@ -11,9 +11,7 @@ int get_random_triangle_index(const Eigen::VectorXd &cumsum_vec);
 
 void random_points_on_mesh(const int n, const Eigen::MatrixXd &V,
                            const Eigen::MatrixXi &F, Eigen::MatrixXd &X) {
-  assert(X.rows() == n && "X must have n rows");
-  assert(X.cols() == 3 && "X must have 3 columns");
-
+  X.resize(n, 3);
   assert(V.cols() == 3 && "V must have 3 columns");
   assert(F.cols() == 3 && "F must have 3 columns");
 
