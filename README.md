@@ -488,7 +488,7 @@ $$
 
 Letting $\mathbf{M} = \overline{\mathbf{P}}^{\top} \overline{\mathbf{X}}$. We can understand this problem as _projecting_ the [covariance matrix](https://en.wikipedia.org/wiki/Covariance_matrix)  $\mathbf{M}$ to the nearest rotation matrix $\mathbf{R}$.
 
-> **Question:** How can we prove that $\left<\mathbf{R}\overline{\mathbf{X}}^\top,\overline{\mathbf{P}}^\top\right> \left<\mathbf{R},\overline{\mathbf{P}}^\top\overline{\mathbf{X}}\right>$?
+> **Question:** How can we prove that $\left<\mathbf{R}\overline{\mathbf{X}}^\top,\overline{\mathbf{P}}^\top\right> = \left<\mathbf{R},\overline{\mathbf{P}}^\top\overline{\mathbf{X}}\right>$?
 >
 > **Hint:**
 > Recall some linear algebra properties:
@@ -582,8 +582,8 @@ $$
 \sum\_{i=1}^k \left((\mathbf{R} \mathbf{x}\_i + \mathbf{t} - \mathbf{p}\_i)\cdot \hat{\mathbf{n}}\_i\right)^2,
 $$
 
-Unlike the point-to-point problem above, there is closed-form solution to this problem. Instead we will ensure that 
-that $\mathbf{R}$ is not just any $3\times 3$ matrix, but a rotation matrix by iteartive linearization.
+Unlike the point-to-point problem above, there is no closed-form solution to this problem.
+Instead we will ensure that $\mathbf{R}$ is not just any $3\times 3$ matrix, but a rotation matrix by iteartive linearization.
 
 If we simply optimize the 9 matrix entries of $\mathbf{R}$ directly, the result will be far from a rotation matrix: for example, if $\mathbf{X}$ is a twice scaled version of $\mathbf{P}$, then this unconstrained optimization would happily declare the entries of $\mathbf{R}$ to describe a (non-orthonormal) scaling matrix.
 
@@ -933,7 +933,7 @@ point-to-point matching energy.
 ### `src/point_to_plane_rigid_matching.cpp`
 Given a set of source points `X` and corresponding target points `P` and their
 normals `N`, find the optimal rigid transformation (`R`,`t`) that aligns `X` to
-planes passing through `P` orthogonal to `N`, minimizing the point-to-point
+planes passing through `P` orthogonal to `N`, minimizing the point-to-plane
 matching energy.
 
 ### `src/icp_single_iteration.cpp`
