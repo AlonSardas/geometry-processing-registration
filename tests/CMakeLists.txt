@@ -4,6 +4,7 @@ add_executable(run_tests
   test_point_mesh_distance.cpp
   test_hausdorff_lower_bound.cpp
   test_closest_rotation.cpp
+  test_rigid_matching.cpp
 )
 
 target_link_libraries(run_tests
