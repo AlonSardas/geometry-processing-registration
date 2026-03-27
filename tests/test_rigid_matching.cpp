@@ -5,6 +5,7 @@
 #include "point_to_point_rigid_matching.h"
 #include "random_points_on_mesh.h"
 #include "test_meshes.h"
+#include <Eigen/Geometry>
 #include <cmath>
 #include <gtest/gtest.h>
 
@@ -39,6 +40,12 @@ TEST(PointToPlaneRigidMatching, TestCubeToCircleRigidMatching) {
 
   generate_circle_mesh(VX, FX, Eigen::RowVector3d(0, -12, 0), 1.0);
   generate_cube_mesh(VY, FY, Eigen::RowVector3d(-3, 0, 0), 4.0);
+
+  // It is important that the body is not aligned with the axis, because
+  // otherwise the matrix A in not invertible.
+  Eigen::Matrix3d R;
+  R = Eigen::AngleAxisd(0.4, Eigen::Vector3d(1, 1, 0).normalized());
+  VY = (R * VY.transpose()).transpose();
 
   int samples = 200;
   run_rigid_matching_test(VX, FX, VY, FY, samples,

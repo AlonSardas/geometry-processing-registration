@@ -1,7 +1,6 @@
 #include "point_to_point_rigid_matching.h"
 #include "closest_rotation.h"
 #include <Eigen/Dense>
-#include <iostream>
 
 void point_to_point_rigid_matching(const Eigen::MatrixXd &X,
                                    const Eigen::MatrixXd &P, Eigen::Matrix3d &R,
@@ -16,14 +15,5 @@ void point_to_point_rigid_matching(const Eigen::MatrixXd &X,
          "P_bar has wrong size");
   Eigen::Matrix3d M = P_bar.transpose() * X_bar;
   closest_rotation(M, R);
-  // std::cout << "M R similarity " << (M.array() * R.array()).sum() <<
-  // std::endl; std::cout << "M Identity similarity "
-  //        << (M.array() * Eigen::Matrix3d::Identity().array()).sum()
-  //        << std::endl;
-  // std::cout << "M " << M << std::endl;
-  // std::cout << "R " << R << std::endl;
-  // std::cout << "R^T * R:\n" << R.transpose() * R << std::endl;
-  // std::cout << "det(R): " << R.determinant() << std::endl;
-  // R = Eigen::Matrix3d::Identity();
   t = p_bar - x_bar * R.transpose();
 }
